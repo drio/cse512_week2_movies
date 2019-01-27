@@ -58,6 +58,13 @@ module.exports = {
         ]
       },
 
+			  {
+         test: /\.(csv|tsv)$/,
+         use: [
+           'csv-loader'
+         ]
+       },
+
       {
         test: /\.(png|jpg|gif)$/,
         use: [
