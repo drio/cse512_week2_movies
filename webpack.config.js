@@ -1,7 +1,7 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); //  -> ADDED IN THIS STEP
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const paths = {
   DIST: path.resolve(__dirname, 'dist'),
@@ -21,8 +21,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html'),
     }),
-		// CSS will be extracted to this bundle file
-    new ExtractTextPlugin('style.bundle.css'), 
+		new MiniCssExtractPlugin({
+      filename: "style.bundle.css",
+      chunkFilename: "[id].css"
+    })
   ],
 
   // LOADERS configuration
@@ -36,15 +38,26 @@ module.exports = {
           'babel-loader',
         ],
       },
+
+
       // CSS loader to CSS files
-      // Files will get handled by css loader and then passed to the extract text plugin
+      // Files will get handled by css loader and then passed to the extract css plugin
       // which will write it to the file we defined above
-      {
+			{
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              //publicPath: '../'
+            }
+          },
+          "css-loader"
+        ]
       },
+
       {
         test: /\.(png|jpg|gif)$/,
         use: [
