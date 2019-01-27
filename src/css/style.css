@@ -1,0 +1,35 @@
+body {
+  background: white;
+  font: 16px/1.6em  Helvetica, sans-serif;
+  margin: 50px;
+  padding: 10px;
+}
+
+.header-img {
+  width:700px;
+  height: auto;
+}
+
+.main-container {
+  margin: auto;
+  width: 780px;
+  position: relative;
+  padding-right: 250px;
+}
+
+#table {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+#viz-container {
+  /*display: block;*/
+  width: 100%;
+  border: 0px solid grey;
+  padding: 10px;
+  /*flex-wrap: wrap;*/
+}
+
+#attempt1 {
+  margin-top: 40px;
+}
