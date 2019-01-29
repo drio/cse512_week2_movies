@@ -1,11 +1,12 @@
 import { select, selectAll } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 import { min, max } from 'd3-array';
+import { format } from 'd3-format';
 
 const getMinMax = (arrayPoints) => [ min(arrayPoints), max(arrayPoints) ];
 
  /* https://bl.ocks.org/mbostock/3019563 */
-const margin = {top: 10, right: 20, bottom: 50, left: 20};
+const margin = {top: 10, right: 10, bottom: 10, left: 10};
 
 export const dotPlot = (opts) => {
   const data = opts.data || [],
@@ -40,16 +41,16 @@ export const dotPlot = (opts) => {
       .attr('fill', (d) => d.fill || default_fill)
       .attr("r", (d) => d.r || default_r);
 
-	/*
+	const f = format(".1s");
+
 	svg.selectAll("text")
 		 .data(data)
 		 .enter()
 		 .append("text")
-			 .text((d) => d.x + "," + d.y)
+			 .text((d) => f(d.x) + "," + d.y)
 			 .attr('x', (d) => xScale(d.x))
 			 .attr('y', (d) => yScale(d.y))
 			 .attr("font-family", "sans-serif")
-			 .attr("font-size", "11px")
+			 .attr("font-size", "10px")
 			 .attr("fill", "red");
-	*/
 }

@@ -60,8 +60,4 @@ window.onload = () => {
 
 		holidaysViz(movieRows);
 	});
-	/*
-	console.log(first(moviesData));
-	console.log(data);
-	*/
 };

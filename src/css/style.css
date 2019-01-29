@@ -3,6 +3,7 @@ body {
   font: 16px/1.6em  Helvetica, sans-serif;
   margin: 20px;
   padding: 10px;
+	margin-bottom: 50px;
 }
 
 .header-img {
@@ -11,8 +12,8 @@ body {
 }
 
 .main-container {
-  /*margin: auto;*/
-  width: 780px;
+  margin: auto;
+  width: 900px;
   position: relative;
   padding-right: 250px;
 }
@@ -22,14 +23,24 @@ body {
   padding-top: 10px;
 }
 
-#viz-container {
+#viz-dotplot-container {
   /*display: block;*/
   /*padding: 10px;*/
-  /*flex-wrap: wrap;*/
-  /*border: 1px solid grey;*/
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 1;
+	justify-content: center;
+  border: 1px solid grey;
+	width: 942px;
+  margin-top: 2px;
+}
+
+.dotplot-small {
+  border: 1px solid grey;
+	background:white;
 	width: 300px;
 	height: 300px;
-  margin-top: 5px;
+	margin: 5px;
 }
 
 pre {
