@@ -1,0 +1,18 @@
+export const HEADER = {
+	title:       'Title',
+	us_gross:    'US Gross',
+	world_gross: 'Worldwide Gross',
+	dvd_sales:   'US DVD Sales',
+	budget:      'Production Budget',
+	release:     'Release Date',
+	mpaa:        'MPAA Rating',
+	run_time:    'Running Time (min)',
+	distributor: 'Distributor',
+	source:      'Source',
+	genre:       'Major Genre', 
+	type:        'Creative Type', 
+	director:    'Director', 
+	rt_rating:   'Rotten Tomatoes Rating', 
+	imdb_rating: 'IMDB Rating', 
+	imdb_votes:  'IMDB Votes',
+};

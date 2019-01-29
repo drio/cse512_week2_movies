@@ -4,35 +4,78 @@
     <title>CSE512 week2: Movie Dataset</title>
   </head>
   <body>
-		<h2> The Movie Dataset </h2>
-		<h4> Inspecting the data </h4>
-		<p> The csv file contains 3201 movies for each movie we have the following attributes (not all the movies have all the attributes set): </p>
-		<pre>
-0: "Title"
-1: "US Gross"
-2: "Worldwide Gross"
-3: "US DVD Sales"
-4: "Production Budget"
-5: "Release Date"
-6: "MPAA Rating"
-7: "Running Time (min)"
-8: "Distributor"
-9: "Source"
-10: "Major Genre"
-11: "Creative Type"
-12: "Director"
-13: "Rotten Tomatoes Rating"
-14: "IMDB Rating"
-15: "IMDB Votes"
-		</pre>
+<div class="main-container">
+  <h2> The Movie Dataset </h2>
 
-		<p> Number of movies per year?
-		<p> Distributions: ratings, gross, budgets
-		<p> types of: distributors, genres,
-		<p> Number of directors?
-		<p> Number of movies by Distributor.
-		<p> What are the sources? Values.
+  <h4> Inspecting the data </h4>
+  <p> The csv file contains 3201 movies for each movie we have the following attributes (not all the movies have all the attributes set): </p>
+  <pre>
+  0: "Title"
+  1: "US Gross"
+  2: "Worldwide Gross"
+  3: "US DVD Sales"
+  4: "Production Budget"
+  5: "Release Date"
+  6: "MPAA Rating"
+  7: "Running Time (min)"
+  8: "Distributor"
+  9: "Source"
+  10: "Major Genre"
+  11: "Creative Type"
+  12: "Director"
+  13: "Rotten Tomatoes Rating"
+  14: "IMDB Rating"
+  15: "IMDB Votes"
+  </pre>
 
+  <p> Let's inspect the number of uniq values available per attribute on the dataset:
 
+  <pre>
+  US Gross 3061
+  Worldwide Gross 3075
+  US DVD Sales 565
+  Production Budget 382
+  Release Date 1604
+  MPAA Rating 8
+    (8) ["R", "", "PG", "Not Rated", "PG-13", "G", "NC-17", "Open"]
+  Running Time (min) 110
+  Distributor 175
+  Source 19
+    (19) ["", "Original Screenplay", "Based on Short Film", "Based on Play", "Based on Book/Short Story", "Remake", 
+         "Based on Comic/Graphic Novel", "Based on Real Life Events", "Traditional/Legend/Fairytale", "Based on TV", 
+         "Compilation", "Based on Musical/Opera", "Based on Game", "Spin-Off", "Based on Factual Book/Article", 
+         "Based on Magazine Article", "Disney Ride", "Based on Toy", "Musical Group Movie"]
+  Major Genre 13
+    (13) ["", "Drama", "Comedy", "Musical", "Thriller/Suspense", "Adventure", "Action", "Romantic Comedy", 
+          "Horror", "Western", "Documentary", "Black Comedy", "Concert/Performance"]
+  Creative Type 10
+    (10) ["", "Contemporary Fiction", "Science Fiction", "Historical Fiction", "Fantasy", "Dramatization", 
+         "Factual", "Super Hero", "Multiple Creative Types", "Kids Fiction"]
+  Director 551
+  Rotten Tomatoes Rating 101
+  IMDB Rating 78
+  IMDB Votes 2840
+  </pre>
+
+  <p> Now that I know a bit more about the dataset, what are some interesting questions?
+
+  <h4> How many movies do we have per year? </h4>
+
+  <p> First, there a few entries with incorrect release dates. I am going to only
+  work with movies that have a valid year. To accomplish that, I am only work
+  with years where we have more than 5 movies. In addition, I only process movies
+  for which I can parse the data. After that bit of cleaning, I end up with 3047 movies 
+  that range from year 1970 to 2010. 
+
+  <h4> More interesting questions: Are bad movies, with a big budget, released during the 
+       holidays?</h4>
+
+  <p> This is a more interesting question. To answer that we need the budget, ratings (remember
+  we have rotten tomatoes and imdb) and the release date. Let's hack...
+
+	<div id="viz-container">
+	</div>
+
+</div>
   </body>
 </html>

@@ -1,36 +1,73 @@
 import '../css/style.css';
+import {holidaysViz} from './holidays.js';
+import {HEADER} from './constants.js';
+import {dotPlot} from './dotplot.js';
 
 import {csv} from 'd3-fetch';
-import {map, drop, each} from 'lodash';
+import {chain, keys, filter} from 'lodash';
 
-import moviesData from '../assets/movies_small.csv'
+//const DATA_URL = '/src/assets/movies_small.csv';
+const DATA_URL = '/src//assets/movies.csv';
 
-const loadData = () => {
-	const data = [];
-	return map(drop(moviesData, 1), (row) => {
-		const newObj = {};
-		return {
-			'title'        : row[0],
-			'us_gross'     : +row[1],
-			'world_gross'  : +row[2],
-			'us_dvd_sales' : +row[3],
-			'budget'       : +row[4],
-			'release_date' : row[5],
-			'rating'       : row[6],
-			'run_time'     : row[7],
-			'distributor'  : row[8],
-			'source'       : row[9],
-			'genre'        : row[10],
-			'type'         : row[11],
-			'director'     : row[12],
-			'rating'       : { rt: row[13], imdb: row[14]},
-			'imdb_votes'   : row[15],
+const findAttributeValuesFor = (attrName, movieRows) => {
+	const set = new Set([]);
+	movieRows.forEach((movie) => set.add(movie[attrName]));
+	const arr = Array.from(set);
+	console.log("  ", attrName, arr.length);
+	if (arr.length < 20) console.log("   ", arr);
+}
+
+const getMoviesByYear = (movieRows) => {
+	const byYear = {};
+	movieRows.forEach((movie) => {
+		const dateString = movie[HEADER.release];
+		const parsed = Date.parse(dateString);
+		if (parsed && parsed > 0) {
+			const year = new Date(dateString).getFullYear();
+			if (!byYear.hasOwnProperty(year)) 
+				byYear[year] = [];
+			byYear[year].push(movie);
+		}
+	})
+	/* Let's clean up and only return years where we have enough movies */
+	const moviesByYearClean = {};
+	const allMoviesClean = []; 
+	keys(byYear).forEach((year) => {
+		if (byYear[year].length > 5) {
+			moviesByYearClean[year] = byYear[year];
+			allMoviesClean.push(byYear[year]);
 		}
 	});
+	return {moviesByYearClean, allMoviesClean};	
+}
+
+const reportStats = (movieRows) => {
+	console.log("header attributes: ", movieRows.columns);
+	console.log("Number of entries: ", movieRows.length);
+	//console.log("Inspecting attribute values:");
+	//keys(HEADER).forEach((attrAlias) => findAttributeValuesFor(HEADER[attrAlias], movieRows));
 };
 
 window.onload = () => {
-	const data = loadData();
-	console.log(_.first(moviesData));
-	each(data, (m) => { console.log(m.release_date)} );
-}
+  csv(DATA_URL).then((movieRows) => {
+		reportStats(movieRows);
+
+		const {moviesByYearClean, allMoviesClean} = getMoviesByYear(movieRows);
+		let nMovies = 0;
+		keys(moviesByYearClean).forEach((year) => {
+			nMovies += moviesByYearClean[year].length
+		});
+		console.log("Number of movies after filtering: ", nMovies);
+
+		holidaysViz(movieRows);
+		dotPlot({
+			width: 400,
+			height: 200,
+			data: [{x:10, y:10}, {x:210, y:50, r:20, fill: 'red'}, {x:350, y: 100}, {x:511, y:150}]
+		});
+	});
+	/*
+	console.log(first(moviesData));
+	console.log(data);
+	*/
+};

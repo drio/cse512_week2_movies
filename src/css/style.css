@@ -11,7 +11,7 @@ body {
 }
 
 .main-container {
-  margin: auto;
+  /*margin: auto;*/
   width: 780px;
   position: relative;
   padding-right: 250px;
@@ -24,10 +24,17 @@ body {
 
 #viz-container {
   /*display: block;*/
-  width: 100%;
-  border: 0px solid grey;
-  padding: 10px;
+  /*padding: 10px;*/
   /*flex-wrap: wrap;*/
+  /*border: 1px solid grey;*/
+	width: 800px;
+	height: 400px;
+  margin-top: 40px;
+}
+
+pre {
+	padding-left: 20px;
+	font-size: 14px;
 }
 
 #attempt1 {
