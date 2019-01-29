@@ -1,7 +1,6 @@
 import '../css/style.css';
 import {holidaysViz} from './holidays.js';
 import {HEADER} from './constants.js';
-import {dotPlot} from './dotplot.js';
 
 import {csv} from 'd3-fetch';
 import {chain, keys, filter} from 'lodash';
@@ -60,11 +59,6 @@ window.onload = () => {
 		console.log("Number of movies after filtering: ", nMovies);
 
 		holidaysViz(movieRows);
-		dotPlot({
-			width: 400,
-			height: 200,
-			data: [{x:10, y:10}, {x:210, y:50, r:20, fill: 'red'}, {x:350, y: 100}, {x:511, y:150}]
-		});
 	});
 	/*
 	console.log(first(moviesData));

@@ -10,7 +10,7 @@ const margin = {top: 10, right: 20, bottom: 50, left: 20};
 export const dotPlot = (opts) => {
   const data = opts.data || [],
         default_fill = 'black',
-        default_r = 5;
+        default_r = 2;
 
   const width  = opts.width - margin.left - margin.right,
         height = opts.height - margin.top - margin.bottom;
@@ -23,7 +23,7 @@ export const dotPlot = (opts) => {
     .domain(getMinMax(data.map((point) => point.y)))
     .range([height, 0]);
 
-  const svg = select("#viz-container")
+  const svg = select(opts.elementID)
     .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)

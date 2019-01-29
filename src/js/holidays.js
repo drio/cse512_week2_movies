@@ -1,4 +1,5 @@
 import {HEADER} from './constants.js';
+import {dotPlot} from './dotplot.js';
 
 const processMovies = (movies) => {
 	const monthToMovies = {};
@@ -15,8 +16,14 @@ const processMovies = (movies) => {
 };
 
 export const holidaysViz = (movies) => {
-	const listMoviesPerMonth = processMovies(movies);
-	console.log(listMoviesPerMonth);
-	return 123;
+	const monthToMovies = processMovies(movies);
+	console.log(monthToMovies);
+	dotPlot({
+		elementID: '#viz-container',
+		width: 200,
+	  height: 200,
+		data: monthToMovies[7].map((m) => ({x: +m[HEADER.budget], y: +m[HEADER.imdb_rating]})),
+  });
+
 };
 
