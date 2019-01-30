@@ -28,15 +28,6 @@ export const dotPlot = (opts) => {
     .domain(getMinMax(data.map((point) => point.y)))
     .range([height, 0]);
 
-  const xAxis = axisBottom()
-    .scale(xScale)
-    .ticks(5)
-    .tickFormat(formatSIPrefix);
-
-  const yAxis = axisLeft()
-    .scale(yScale)
-    .ticks(5)
-    .tickFormat(formatSIPrefix);
 
   if (opts.background)
     select(opts.elementID).style("background", opts.background);
@@ -58,6 +49,17 @@ export const dotPlot = (opts) => {
       .attr('fill', (d) => d.fill || default_fill)
       .attr("r", (d) => d.r || default_r)
             .on("click", (d) => console.log(d.movie));
+
+  /* Axis */ 
+  const xAxis = axisBottom()
+    .scale(xScale)
+    .ticks(5)
+    .tickFormat(formatSIPrefix);
+
+  const yAxis = axisLeft()
+    .scale(yScale)
+    .ticks(5)
+    .tickFormat(formatSIPrefix);
 
   svg.append("g")
     .attr("class", "axis")
