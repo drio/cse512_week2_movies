@@ -26,8 +26,7 @@ const addContainers = (elemID, monthToMovies) => {
 		.enter()
 			.append("div")
 			.attr("class", "dotplot-small")
-			.attr("id", (d) => "dotplot-small-month" + d )
-			.attr("style", (d) => ((+d>4 && +d<8) || (+d === 11)) ? "background: lightpink" : "");
+			.attr("id", (d) => "dotplot-small-month" + d );
 }
 
 export const holidaysViz = (movies) => {
@@ -39,6 +38,9 @@ export const holidaysViz = (movies) => {
 			elementID: '#dotplot-small-month' + month,
 			width: 300,
 			height: 300,
+			xLabel: 'revenue',
+			yLabel: 'ratings',
+			background: ((month>4 && month<8) || (month === 11)) ? "lightpink" : "LightCyan",
 			data: monthToMovies[month].map((m) => {
 				const color = (m[HEADER.title] === 'Back to the Future') ?
 					            'orangeRed' : 'black';	

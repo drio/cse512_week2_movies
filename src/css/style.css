@@ -30,7 +30,7 @@ body {
   flex-wrap: wrap;
 	flex-grow: 1;
 	justify-content: center;
-  border: 1px solid grey;
+  border: 0px solid grey;
 	width: 942px;
   margin-top: 2px;
 }
@@ -38,14 +38,14 @@ body {
 #viz-usvsworld-container {
   /*display: block;*/
   /*padding: 10px;*/
-  border: 1px solid grey;
-	width: 600px;
+  border: 0px solid grey;
+	width: 400px;
   margin-top: 2px;
 }
 
 
 .dotplot-small {
-  border: 1px solid grey;
+  border: 0px solid grey;
 	background:white;
 	width: 300px;
 	height: 300px;
