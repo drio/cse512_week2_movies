@@ -16,33 +16,46 @@ const findAttributeValuesFor = (attrName, movieRows) => {
 	if (arr.length < 20) console.log("   ", arr);
 }
 
+const isValidMovie = (movie) => {
+	const dateString = movie[HEADER.release];
+	const parsed = Date.parse(dateString);
+	return (
+		parsed && parsed > 0 &&
+	  +movie[HEADER.imdb_rating] > 0 &&
+	  +movie[HEADER.imdb_rating] <= 10 &&
+	  +movie[HEADER.rt_rating] > 0 &&
+	  +movie[HEADER.rt_rating] <= 100 &&
+	  +movie[HEADER.us_gross] > 100 &&
+	  +movie[HEADER.world_gross] > 100 &&
+	  +movie[HEADER.world_gross] !== +movie[HEADER.us_gross] &&
+	  (+movie[HEADER.imdb_votes] && +movie[HEADER.imdb_votes] > 100)
+	);	
+};
+
 const getMoviesByYear = (movieRows) => {
+	/* Build a year to clean movies  data structure */
 	const byYear = {};
 	movieRows.forEach((movie) => {
-		const dateString = movie[HEADER.release];
-		const parsed = Date.parse(dateString);
-		if (parsed && parsed > 0 &&
-			  +movie[HEADER.imdb_rating] >= 0 &&
-			  +movie[HEADER.imdb_rating] <= 10 &&
-			  +movie[HEADER.rt_rating] >= 10 &&
-			  +movie[HEADER.rt_rating] <= 100) {
-			const year = new Date(dateString).getFullYear();
+		if (isValidMovie(movie)) {
+			const year = new Date(movie[HEADER.release]).getFullYear();
 			if (!byYear.hasOwnProperty(year)) {
 				byYear[year] = [];
 			}
 			byYear[year].push(movie);
 		}
 	})
+
 	/* Let's clean up and only return years where we have enough movies */
 	const moviesByYearClean = {};
-	const allMoviesClean = []; 
+	const listAllMoviesClean = []; 
 	keys(byYear).forEach((year) => {
 		if (byYear[year].length > 5) {
 			moviesByYearClean[year] = byYear[year];
-			byYear[year].forEach((m) => allMoviesClean.push(m));
+			byYear[year].forEach((m) => listAllMoviesClean.push(m));
 		}
 	});
-	return {moviesByYearClean, allMoviesClean};	
+
+	return {moviesByYearClean, listAllMoviesClean};	
 }
 
 const reportStats = (movieRows) => {
@@ -54,15 +67,9 @@ const reportStats = (movieRows) => {
 
 window.onload = () => {
   csv(DATA_URL).then((movieRows) => {
-		reportStats(movieRows);
-
-		const {moviesByYearClean, allMoviesClean} = getMoviesByYear(movieRows);
-		let nMovies = 0;
-		keys(moviesByYearClean).forEach((year) => {
-			nMovies += moviesByYearClean[year].length
-		});
-		console.log("Number of movies after filtering: ", nMovies);
-
-		holidaysViz(allMoviesClean);
+		//reportStats(movieRows);
+		const {listAllMoviesClean} = getMoviesByYear(movieRows);
+		console.log("Number of movies after filtering: ", listAllMoviesClean.length);
+		holidaysViz(listAllMoviesClean);
 	});
 };

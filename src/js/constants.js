@@ -1,3 +1,5 @@
+import { format } from 'd3-format';
+
 export const HEADER = {
 	title:       'Title',
 	us_gross:    'US Gross',
@@ -16,3 +18,28 @@ export const HEADER = {
 	imdb_rating: 'IMDB Rating', 
 	imdb_votes:  'IMDB Votes',
 };
+
+export const combinedGross = (movie) => {
+	return (+movie[HEADER.us_gross]) + (+movie[HEADER.world_gross]);
+};
+
+export const combinedRatings = (movie) => {
+	const imdb = +movie[HEADER.imdb_rating] ? (+movie[HEADER.imdb_rating]*10) : 0;
+	const rt   = +movie[HEADER.rt_rating] ? (+movie[HEADER.rt_rating]) : 0;
+
+	let combinedRating;
+	if (imdb && rt) {
+		combinedRating = (rt + imdb)/2;
+	}
+	else if (imdb && !rt) {
+		combinedRating = imdb;
+	}
+	else if (!imdb && rt) {
+		combinedRating = rt;
+	}
+	else {
+		combinedRating = 0;
+	}
+	
+	return combinedRating;
+}; 

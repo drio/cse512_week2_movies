@@ -7,7 +7,7 @@
 <div class="main-container">
   <h2> The Movie Dataset </h2>
 
-  <h4> Inspecting the data </h4>
+  <h3> Inspecting the data </h3>
   <p> The csv file contains 3201 movies for each movie we have the following attributes (not all the movies have all the attributes set): </p>
   <pre>
   0: "Title"
@@ -37,20 +37,11 @@
   Production Budget 382
   Release Date 1604
   MPAA Rating 8
-    (8) ["R", "", "PG", "Not Rated", "PG-13", "G", "NC-17", "Open"]
   Running Time (min) 110
   Distributor 175
   Source 19
-  ["Original Screenplay", "Based on Short Film", "Based on Play", "Based on Book/Short Story", "Remake", 
-       "Based on Comic/Graphic Novel", "Based on Real Life Events", "Traditional/Legend/Fairytale", "Based on TV", 
-       "Compilation", "Based on Musical/Opera", "Based on Game", "Spin-Off", "Based on Factual Book/Article", 
-       "Based on Magazine Article", "Disney Ride", "Based on Toy", "Musical Group Movie"]
   Major Genre 13
-  ["", "Drama", "Comedy", "Musical", "Thriller/Suspense", "Adventure", "Action", "Romantic Comedy", 
-   "Horror", "Western", "Documentary", "Black Comedy", "Concert/Performance"]
   Creative Type 10
-  ["Contemporary Fiction", "Science Fiction", "Historical Fiction", "Fantasy", "Dramatization", 
-   "Factual", "Super Hero", "Multiple Creative Types", "Kids Fiction"]
   Director 551
   Rotten Tomatoes Rating 101
   IMDB Rating 78
@@ -59,7 +50,7 @@
 
   <p> Now that I know a bit more about the dataset, what are some interesting questions?
 
-  <h4> How many movies do we have per year? </h4>
+  <h3> How many movies do we have per year? </h3>
 
   <p> First, there a few entries with incorrect release dates. I am going to only
   work with movies that have a valid year. To accomplish that, I am only work
@@ -67,18 +58,42 @@
   for which I can parse the data. After that bit of cleaning, I end up with 3047 movies 
   that range from year 1970 to 2010. 
 
-  <h4> More interesting questions: Are bad movies, with a big budget, released during the 
-       holidays?</h4>
+  <h3> More interesting questions: Are bad movies, with a big budget, released during the 
+       holidays?</h3>
 
   <p> This is a more interesting question. To answer that we need the budget, ratings (remember
   we have rotten tomatoes and imdb) and the release date. Let's hack...
 
   <div id="viz-dotplot-container"></div>
 
-  <p> I don't see any particular trend in the data that suggest bad movies (low ratings) with high
-  budget for the holidays. We should see more dots in the bottom right quadrant for the summer and 
-  Christmas. Each dotplot contains data for a particular month starting with January (first dotplot) and
-  ending in December (bottom right dotplot).
+<p> I don't see any particular trend in the data that suggest bad movies (low
+ratings) with high revenue for the holidays. We should see more dots in the
+bottom right quadrant for the summer and Christmas. Each dotplot contains data
+for a particular month starting with January (first dotplot) and ending in
+December (bottom right dotplot).
+
+<p> A lot of filtering and cleaning and digging here but I can't confirm my
+hypothesis.  I tried to look at both ratings by combining them when available. 
+
+<p> Another lesson learned: Clean clean and clean the data. And make sure it is
+correct and you don't have bugs in your code that introduce errors.
+
+<p> We could look at the data starting in older years. Does the hypothesis hold then? 
+Also, we would like to provide controls so we can dynamically update the dataset by 
+changing things like: movie year, 
+
+<p> Another question: is there an increase in budget over time (adjusted to inflation)?
+
+<p> Another question: Do movies with more budget have better ratings?
+
+<p> Are there directors releasing consistency highly rated movies?
+
+<p> I have to hack the viz so I can check the title for movies with high
+ratings so I can see if I have seen them.
+
+<h3> Is there an overlap in taste between US and the rest of the world? </h3>
+
+
   
 
 </div>

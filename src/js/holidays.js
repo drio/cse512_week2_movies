@@ -1,4 +1,4 @@
-import {HEADER} from './constants.js';
+import {HEADER, combinedRatings, combinedGross} from './constants.js';
 import {dotPlot} from './dotplot.js';
 import { select, selectAll } from 'd3-selection';
 
@@ -39,9 +39,11 @@ export const holidaysViz = (movies) => {
 			elementID: '#dotplot-small-month' + month,
 			width: 300,
 			height: 300,
-			data: monthToMovies[month].map((m) => (
-				{ x: +m[HEADER.us_gross], y: +m[HEADER.imdb_rating], })
-			),
+			data: monthToMovies[month].map((m) => {
+				const color = (m[HEADER.title] === 'Back to the Future') ?
+					            'orangeRed' : 'black';	
+				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 3 };
+			})
 		});
 	});
 };

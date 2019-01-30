@@ -3,7 +3,7 @@ import { scaleLinear } from 'd3-scale';
 import { min, max } from 'd3-array';
 import { format } from 'd3-format';
 
-const getMinMax = (arrayPoints) => [ min(arrayPoints), max(arrayPoints) ];
+const getMinMax = (arrayPoints) => [ 0, max(arrayPoints) ];
 
  /* https://bl.ocks.org/mbostock/3019563 */
 const margin = {top: 10, right: 10, bottom: 10, left: 10};
