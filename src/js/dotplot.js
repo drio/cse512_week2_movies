@@ -2,6 +2,7 @@ import { select, selectAll } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 import { min, max } from 'd3-array';
 import { format } from 'd3-format';
+import {HEADER} from './constants.js';
 
 const getMinMax = (arrayPoints) => [ 0, max(arrayPoints) ];
 
@@ -39,7 +40,8 @@ export const dotPlot = (opts) => {
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
       .attr('fill', (d) => d.fill || default_fill)
-      .attr("r", (d) => d.r || default_r);
+      .attr("r", (d) => d.r || default_r)
+			.on("click", (d) => console.log(d.movie));
 
 	const f = format(".1s");
 

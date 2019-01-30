@@ -35,6 +35,15 @@ body {
   margin-top: 2px;
 }
 
+#viz-usvsworld-container {
+  /*display: block;*/
+  /*padding: 10px;*/
+  border: 1px solid grey;
+	width: 600px;
+  margin-top: 2px;
+}
+
+
 .dotplot-small {
   border: 1px solid grey;
 	background:white;

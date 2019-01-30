@@ -42,7 +42,7 @@ export const holidaysViz = (movies) => {
 			data: monthToMovies[month].map((m) => {
 				const color = (m[HEADER.title] === 'Back to the Future') ?
 					            'orangeRed' : 'black';	
-				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 3 };
+				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 4, movie: m };
 			})
 		});
 	});

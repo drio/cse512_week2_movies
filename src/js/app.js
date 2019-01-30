@@ -1,5 +1,6 @@
 import '../css/style.css';
 import {holidaysViz} from './holidays.js';
+import {usVsWorldViz} from './usvsworld.js';
 import {HEADER} from './constants.js';
 
 import {csv} from 'd3-fetch';
@@ -71,5 +72,6 @@ window.onload = () => {
 		const {listAllMoviesClean} = getMoviesByYear(movieRows);
 		console.log("Number of movies after filtering: ", listAllMoviesClean.length);
 		holidaysViz(listAllMoviesClean);
+		usVsWorldViz(listAllMoviesClean);
 	});
 };
