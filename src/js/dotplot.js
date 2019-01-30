@@ -43,6 +43,7 @@ export const dotPlot = (opts) => {
 
 	const f = format(".1s");
 
+	/*
 	svg.selectAll("text")
 		 .data(data)
 		 .enter()
@@ -53,4 +54,5 @@ export const dotPlot = (opts) => {
 			 .attr("font-family", "sans-serif")
 			 .attr("font-size", "10px")
 			 .attr("fill", "red");
+	*/
 }

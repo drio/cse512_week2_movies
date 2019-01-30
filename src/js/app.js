@@ -21,10 +21,15 @@ const getMoviesByYear = (movieRows) => {
 	movieRows.forEach((movie) => {
 		const dateString = movie[HEADER.release];
 		const parsed = Date.parse(dateString);
-		if (parsed && parsed > 0) {
+		if (parsed && parsed > 0 &&
+			  +movie[HEADER.imdb_rating] >= 0 &&
+			  +movie[HEADER.imdb_rating] <= 10 &&
+			  +movie[HEADER.rt_rating] >= 10 &&
+			  +movie[HEADER.rt_rating] <= 100) {
 			const year = new Date(dateString).getFullYear();
-			if (!byYear.hasOwnProperty(year)) 
+			if (!byYear.hasOwnProperty(year)) {
 				byYear[year] = [];
+			}
 			byYear[year].push(movie);
 		}
 	})

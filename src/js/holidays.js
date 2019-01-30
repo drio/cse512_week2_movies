@@ -1,7 +1,6 @@
 import {HEADER} from './constants.js';
 import {dotPlot} from './dotplot.js';
 import { select, selectAll } from 'd3-selection';
-import { format } from 'd3-format';
 
 const processMovies = (movies) => {
 	const monthToMovies = {};
@@ -27,7 +26,8 @@ const addContainers = (elemID, monthToMovies) => {
 		.enter()
 			.append("div")
 			.attr("class", "dotplot-small")
-			.attr("id", (d) => "dotplot-small-month" + d );
+			.attr("id", (d) => "dotplot-small-month" + d )
+			.attr("style", (d) => ((+d>4 && +d<8) || (+d === 11)) ? "background: lightpink" : "");
 }
 
 export const holidaysViz = (movies) => {
@@ -39,7 +39,9 @@ export const holidaysViz = (movies) => {
 			elementID: '#dotplot-small-month' + month,
 			width: 300,
 			height: 300,
-			data: monthToMovies[month].map((m) => ({x: +m[HEADER.budget], y: +m[HEADER.imdb_rating]})),
+			data: monthToMovies[month].map((m) => (
+				{ x: +m[HEADER.us_gross], y: +m[HEADER.imdb_rating], })
+			),
 		});
 	});
 };
