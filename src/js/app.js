@@ -39,7 +39,7 @@ const getMoviesByYear = (movieRows) => {
 	keys(byYear).forEach((year) => {
 		if (byYear[year].length > 5) {
 			moviesByYearClean[year] = byYear[year];
-			allMoviesClean.push(byYear[year]);
+			byYear[year].forEach((m) => allMoviesClean.push(m));
 		}
 	});
 	return {moviesByYearClean, allMoviesClean};	
@@ -63,6 +63,6 @@ window.onload = () => {
 		});
 		console.log("Number of movies after filtering: ", nMovies);
 
-		holidaysViz(movieRows);
+		holidaysViz(allMoviesClean);
 	});
 };
