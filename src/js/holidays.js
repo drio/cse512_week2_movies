@@ -29,22 +29,28 @@ const addContainers = (elemIDSel, monthToMovies) => {
 			.attr("id", (d) => "dotplot-small-month" + d );
 }
 
+const updateSelects = () => {
+  select("#year-start").append('option').attr('value', 1111).html('1111');
+}
+
 export const holidaysViz = (movies) => {
 	const monthToMovies = processMovies(movies);
-	console.log(monthToMovies);
 	addContainers("#viz-dotplot-container", monthToMovies);
+  updateSelects();
 	_.range(12).forEach((month) => {
 		dotPlot({
 			elementIDSel: '#dotplot-small-month' + month,
-			width: 300,
-			height: 300,
+			width: 200,
+			height: 200,
 			xLabel: 'revenue',
 			yLabel: 'ratings',
+      xNumTicks: 3,
+      yNumTicks: 3,
 			background: ((month>4 && month<8) || (month === 11)) ? "lightpink" : "LightCyan",
 			data: monthToMovies[month].map((m) => {
 				const color = (m[HEADER.title] === 'Back to the Future') ?
 					            'orangeRed' : 'black';	
-				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 4, movie: m };
+				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 3, movie: m };
 			})
 		});
 	});

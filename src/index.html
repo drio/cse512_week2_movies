@@ -72,6 +72,16 @@ that range from year 1970 to 2010.
 <p> This is a more interesting question. To answer that we need the budget, ratings (remember
 we have rotten tomatoes and imdb) and the release date. Let's hack...
 
+<p>
+Year start:
+<select id="year-start"> 
+  <option value="1975">1975</option>
+</select>
+Year end:
+<select id="year-end"> 
+  <option value="2010">2010</option>
+</select>
+
 <div id="viz-dotplot-container"></div>
 
 <p> I don't see any particular trend in the data that suggest bad movies (low
@@ -104,7 +114,10 @@ ratings so I can see if I have seen them. Done (via console).
 Here I am plotting the revenue for the movie in the US (x) and the rest of the world (y). 
 It seems there is:
 
-<div id="viz-usvsworld-container"></div>
+<div id="viz-usvsworld-container">
+  <div id="viz-usvsworld-viz">
+  </div>
+</div>
 
 </div>
   </body>

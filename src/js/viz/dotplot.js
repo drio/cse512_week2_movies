@@ -51,12 +51,12 @@ export const dotPlot = (opts) => {
   /* Axis */ 
   const xAxis = axisBottom()
     .scale(xScale)
-    .ticks(5)
+    .ticks(opts.xNumTicks)
     .tickFormat(formatSIPrefix);
 
   const yAxis = axisLeft()
     .scale(yScale)
-    .ticks(5)
+    .ticks(opts.yNumTicks)
     .tickFormat(formatSIPrefix);
 
   svg.append("g")

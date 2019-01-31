@@ -31,14 +31,14 @@ body {
 	flex-grow: 0;
 	justify-content: left;
   border: 0px solid grey;
-	width: 840px;
+	width: 900px;
   margin-top: 0px;
 }
 
 .histogram-small {
-  border: 1px solid grey;
-	background:white;
-	width: 390px;
+  border: 0px solid grey;
+	background: Aliceblue;
+	width: 270px;
 	margin: 5px;
 }
 
@@ -50,26 +50,31 @@ body {
 	flex-grow: 1;
 	justify-content: center;
   border: 0px solid grey;
-	width: 942px;
+	width: 900px;
   margin-top: 2px;
 }
-
-#viz-usvsworld-container {
-  /*display: block;*/
-  /*padding: 10px;*/
-  border: 0px solid grey;
-	width: 400px;
-  margin-top: 2px;
-}
-
 
 .dotplot-small {
   border: 0px solid grey;
 	background:white;
-	width: 300px;
-	height: 300px;
+	width: 200px;
+	height: 200px;
 	margin: 5px;
 }
+
+
+#viz-usvsworld-container {
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 0;
+	justify-content: center;
+  /*display: block;*/
+  /*padding: 10px;*/
+  border: 0px solid grey;
+	width: 800px;
+  margin-top: 2px;
+}
+
 
 pre {
 	padding-left: 20px;

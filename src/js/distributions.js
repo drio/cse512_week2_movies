@@ -29,9 +29,9 @@ export const distributionsViz = (movies) => {
     data.x = attr + ' value'
     data.y = 'frequency';
     drd_histogram({
-      width: 360,
-      numBars: 20,
-      height: 200,
+      width: 250,
+      height: 150,
+      numBars: 15,
       elementIDSel: `#histogram-small-${attr}`,
       data,
     });
