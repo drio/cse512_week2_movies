@@ -1,4 +1,4 @@
-import {HEADER, combinedRatings, combinedGross, YEAR_RANGE} from './constants.js';
+import {HEADER, MONTHS, combinedRatings, combinedGross, YEAR_RANGE} from './constants.js';
 import {dotPlot} from './viz/dotplot.js';
 import {select, selectAll, event as d3event} from 'd3-selection';
 import {range} from 'lodash';
@@ -76,6 +76,7 @@ const renderViz = () => {
 	addContainers("#viz-dotplot-container", monthToMovies);
 	_.range(12).forEach((month) => {
 		dotPlot({
+      title: MONTHS[month],
 			elementIDSel: '#dotplot-small-month' + month,
 			width: 200,
 			height: 200,
@@ -84,7 +85,7 @@ const renderViz = () => {
       xNumTicks: 3,
       yNumTicks: 3,
 			background: ((month>4 && month<8) || (month === 11)) ? "lightpink" : "LightCyan",
-			data: monthToMovies[month].map((m) => {
+			data: (monthToMovies[month] || []).map((m) => {
 				const color = (m[HEADER.title] === 'Back to the Future') ?
 					            'orangeRed' : 'black';	
 				return { x: combinedGross(m), y: combinedRatings(m), fill: color, r: 3, movie: m };

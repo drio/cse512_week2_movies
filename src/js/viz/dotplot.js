@@ -37,6 +37,14 @@ export const dotPlot = (opts) => {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+   svg
+    .append("text")
+    .text(opts.title)
+    .attr("font-size", "8px")
+    .attr("fill", "black")
+    .attr("x", width/3)
+    .attr("y", 0)
+
   svg 
     .selectAll("circle")
     .data(data)
