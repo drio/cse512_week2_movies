@@ -29,10 +29,17 @@ body {
 	display: flex;
   flex-wrap: wrap;
 	flex-grow: 0;
-	justify-content: center;
-  border: 1px solid grey;
-	width: 250px;
+	justify-content: left;
+  border: 0px solid grey;
+	width: 840px;
   margin-top: 0px;
+}
+
+.histogram-small {
+  border: 1px solid grey;
+	background:white;
+	width: 390px;
+	margin: 5px;
 }
 
 #viz-dotplot-container {

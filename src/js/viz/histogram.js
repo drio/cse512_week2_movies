@@ -5,9 +5,10 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 
 const getMinMax = (arrayPoints) => [ 0, max(arrayPoints) ];
+const formatSIPrefix = format(".1s");
 
  /* https://bl.ocks.org/mbostock/3019563 */
-const margin = {top: 5, right: 5, bottom: 15, left: 15};
+const margin = {top: 20, right: 20, bottom: 20, left: 20};
 
 export const drd_histogram = (opts) => {
   const data = opts.data;
@@ -18,7 +19,7 @@ export const drd_histogram = (opts) => {
 
   const bins = histogram()
     .domain(xScale.domain())
-    .thresholds(xScale.ticks(10))(data);
+    .thresholds(xScale.ticks(opts.numBars))(data);
 
   const yScale = scaleLinear()
     .domain([0, max(bins, d => d.length)]).nice()
@@ -26,7 +27,7 @@ export const drd_histogram = (opts) => {
 
 	const xAxis = g => g
     .attr("transform", `translate(0,${opts.height - margin.bottom})`)
-    .call(axisBottom(xScale).tickSizeOuter(0).ticks(4))
+    .call(axisBottom(xScale).tickSizeOuter(0).ticks(4).tickFormat(formatSIPrefix))
     .call(g => g.append("text")
         .attr("x", opts.width - margin.right)
         .attr("y", 25)
@@ -37,10 +38,10 @@ export const drd_histogram = (opts) => {
 
 	const yAxis = g => g
 		.attr("transform", `translate(${margin.left},0)`)
-		.call(axisLeft(yScale).ticks(4))
+		.call(axisLeft(yScale).ticks(4).tickFormat(formatSIPrefix))
 		.call(g => g.select(".domain").remove())
 		.call(g => g.select(".tick:last-of-type text").clone()
-				.attr("x", 0)
+				.attr("x", 10)
 				.attr("y", -10)
 				//.attr("text-anchor", "start")
 				//.attr("font-weight", "bold")

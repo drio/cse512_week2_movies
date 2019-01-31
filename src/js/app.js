@@ -1,11 +1,11 @@
 import '../css/style.css';
 import {holidaysViz} from './holidays.js';
 import {usVsWorldViz} from './usvsworld.js';
-import {drd_histogram} from './viz/histogram.js';
+import {distributionsViz} from './distributions.js';
 import {HEADER} from './constants.js';
 
 import {csv} from 'd3-fetch';
-import {chain, keys, filter, range} from 'lodash';
+import {chain, keys} from 'lodash';
 
 //const DATA_URL = '/src/assets/movies_small.csv';
 const DATA_URL = '/src//assets/movies.csv';
@@ -73,16 +73,7 @@ window.onload = () => {
 		const {listAllMoviesClean} = getMoviesByYear(movieRows);
 		console.log("Number of movies after filtering: ", listAllMoviesClean.length);
 
-		let data = range(100).map((n) => Math.random() * 100 | 0);
-		data.x = "X label";
-		data.y = "Y label";
-		drd_histogram({
-			width: 200,
-			height: 100,
-			elementIDSel: '#viz-histogram-container',
-			data,
-		});
-
+    distributionsViz(listAllMoviesClean);
 		holidaysViz(listAllMoviesClean);
 		usVsWorldViz(listAllMoviesClean);
 	});

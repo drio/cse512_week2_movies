@@ -21,6 +21,11 @@ export const HEADER = {
 	dvd_sales:   'US DVD Sales',
 };
 
+export const numericalAttributes = [
+	'rt_rating', 'imdb_rating', 'imdb_votes', 'run_time', 
+  'budget', 'us_gross', 'world_gross'
+];
+
 export const combinedGross = (movie) => {
 	return (+movie[HEADER.us_gross]) + (+movie[HEADER.world_gross]);
 };
