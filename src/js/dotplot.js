@@ -8,7 +8,7 @@ import {HEADER} from './constants.js';
 const getMinMax = (arrayPoints) => [ 0, max(arrayPoints) ];
 
  /* https://bl.ocks.org/mbostock/3019563 */
-const margin = {top: 10, right: 10, bottom: 40, left: 40};
+const margin = {top: 20, right: 20, bottom: 40, left: 40};
 
 export const dotPlot = (opts) => {
   const data = opts.data || [],
@@ -21,11 +21,11 @@ export const dotPlot = (opts) => {
         height = opts.height - margin.top - margin.bottom;
 
   const xScale = scaleLinear()
-    .domain(getMinMax(data.map((point) => point.x)))
+    .domain(getMinMax(data.map((point) => point.x))).nice()
     .range([0, width]);
 
   const yScale = scaleLinear()
-    .domain(getMinMax(data.map((point) => point.y)))
+    .domain(getMinMax(data.map((point) => point.y))).nice()
     .range([height, 0]);
 
 
