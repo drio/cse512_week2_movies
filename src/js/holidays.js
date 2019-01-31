@@ -1,19 +1,41 @@
-import {HEADER, combinedRatings, combinedGross} from './constants.js';
+import {HEADER, combinedRatings, combinedGross, YEAR_RANGE} from './constants.js';
 import {dotPlot} from './viz/dotplot.js';
-import { select, selectAll } from 'd3-selection';
+import {select, selectAll, event as d3event} from 'd3-selection';
+import {range} from 'lodash';
 
-const processMovies = (movies) => {
+const yearIDS = [ "#year-start", "#year-end" ];
+
+const state = {
+  allMovies: [],
+  yearStart: YEAR_RANGE[0],
+  yearEnd: YEAR_RANGE[1],
+};
+
+const updateCurrentYears = () => {
+  const years =  yearIDS.map((selID) => {
+    const node = select(selID).node();
+    return +node.options[node.selectedIndex].value;
+  });
+  state.yearStart = years[0];
+  state.yearEnd = years[1];
+}
+
+const processMovies = () => {
 	const monthToMovies = {};
-	movies.forEach((movie) => {
+  updateCurrentYears();
+	state.allMovies.forEach((movie) => {
 		const dateString = movie[HEADER.release];
 		const month = new Date(dateString).getMonth(); /* We know it is going to be parse-able */
+    const year = new Date(dateString).getFullYear();
 		if (month < 0 || month > 11 || isNaN(month)) {
 			console.warn("holidays.js processMovies(): found an invalid month.");
 		}
 		else {
-			if (!monthToMovies.hasOwnProperty(month)) 
-				monthToMovies[month] = [];
-			monthToMovies[month].push(movie);
+      if (year >= state.yearStart && year <= state.yearEnd) {
+        if (!monthToMovies.hasOwnProperty(month)) 
+          monthToMovies[month] = [];
+        monthToMovies[month].push(movie);
+      }
 		}
 	});
 	return monthToMovies;
@@ -29,14 +51,29 @@ const addContainers = (elemIDSel, monthToMovies) => {
 			.attr("id", (d) => "dotplot-small-month" + d );
 }
 
-const updateSelects = () => {
-  select("#year-start").append('option').attr('value', 1111).html('1111');
+
+const prepareSelects = () => {
+  const addYears = (sel, yearRange) => {
+    sel
+      .selectAll('option')
+      .data(yearRange)
+      .enter()
+        .append('option')
+        .attr('value', (d) => d)
+        .html((d) => d);
+    sel.on('change', renderViz);
+  }
+
+  const selStart = select("#year-start");
+  const selEnd   = select("#year-end");
+  addYears(selStart, range(YEAR_RANGE[0], YEAR_RANGE[1] + 1))
+  addYears(selEnd, range(YEAR_RANGE[1], YEAR_RANGE[0] + 1))
 }
 
-export const holidaysViz = (movies) => {
-	const monthToMovies = processMovies(movies);
+const renderViz = () => {
+	const monthToMovies = processMovies();
+  selectAll('#viz-dotplot-container').selectAll('div').remove();
 	addContainers("#viz-dotplot-container", monthToMovies);
-  updateSelects();
 	_.range(12).forEach((month) => {
 		dotPlot({
 			elementIDSel: '#dotplot-small-month' + month,
@@ -54,5 +91,10 @@ export const holidaysViz = (movies) => {
 			})
 		});
 	});
-};
+}
 
+export const holidaysViz = (movies) => {
+  state.allMovies = movies;
+  prepareSelects();
+  renderViz();
+};

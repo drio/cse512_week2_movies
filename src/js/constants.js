@@ -21,6 +21,8 @@ export const HEADER = {
 	dvd_sales:   'US DVD Sales',
 };
 
+export const YEAR_RANGE = [ 1960, 2010 ];
+
 export const numericalAttributes = [
 	'rt_rating', 'imdb_rating', 'imdb_votes', 'run_time', 
   'budget', 'us_gross', 'world_gross'
