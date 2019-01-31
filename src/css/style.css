@@ -23,6 +23,18 @@ body {
   padding-top: 10px;
 }
 
+#viz-histogram-container {
+  /*display: block;*/
+  /*padding: 10px;*/
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 0;
+	justify-content: center;
+  border: 1px solid grey;
+	width: 250px;
+  margin-top: 0px;
+}
+
 #viz-dotplot-container {
   /*display: block;*/
   /*padding: 10px;*/

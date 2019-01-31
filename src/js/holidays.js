@@ -1,5 +1,5 @@
 import {HEADER, combinedRatings, combinedGross} from './constants.js';
-import {dotPlot} from './dotplot.js';
+import {dotPlot} from './viz/dotplot.js';
 import { select, selectAll } from 'd3-selection';
 
 const processMovies = (movies) => {
@@ -19,8 +19,8 @@ const processMovies = (movies) => {
 	return monthToMovies;
 };
 
-const addContainers = (elemID, monthToMovies) => {
-	select(elemID)
+const addContainers = (elemIDSel, monthToMovies) => {
+	select(elemIDSel)
 		.selectAll("div")
 		.data(_.keys(monthToMovies))
 		.enter()
@@ -35,7 +35,7 @@ export const holidaysViz = (movies) => {
 	addContainers("#viz-dotplot-container", monthToMovies);
 	_.range(12).forEach((month) => {
 		dotPlot({
-			elementID: '#dotplot-small-month' + month,
+			elementIDSel: '#dotplot-small-month' + month,
 			width: 300,
 			height: 300,
 			xLabel: 'revenue',
