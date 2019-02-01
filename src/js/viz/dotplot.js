@@ -56,7 +56,9 @@ export const dotPlot = (opts) => {
       .attr('stroke', 'black')
       .attr('stroke-width', 1)
       .attr("r", (d) => d.r || default_r)
-        .on("click", opts.onClickLogic);
+        .on("click", opts.onClickLogic)
+        .on("mouseover", opts.onMouseOverLogic)
+        .on("mouseout", opts.onMouseOutLogic);
 
   /* Axis */ 
   const xAxis = axisBottom()

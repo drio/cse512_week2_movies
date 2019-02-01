@@ -70,6 +70,23 @@ pre {
   margin-top: 2px;
 }
 
+#viz-directors-info {
+  /*
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 0;
+  */
+  font-size: 12px;
+	justify-content: center;
+  /*display: block;*/
+  /*padding: 10px;*/
+  background: LavenderBlush;
+  border: 0px solid grey;
+	width: 900px;
+  height: 50px;
+  margin-top: 2px;
+}
+
 #viz-directors {
 	display: flex;
   flex-wrap: wrap;

@@ -5,25 +5,30 @@
   </head>
   <body>
 <div class="main-container">
-  <h2> The Movie Dataset </h2>
 
-  <h3> Inspecting the data </h3>
-  <p> The csv file contains 3201 movies for each movie we have the following attributes (not all the movies have all the attributes set): </p>
-  <pre>
-  0: "Title" 1: "US Gross" 2: "Worldwide Gross" 3: "US DVD Sales" 4: "Production Budget"
-  5: "Release Date" 6: "MPAA Rating" 7: "Running Time (min)" 8: "Distributor"
-  9: "Source" 10: "Major Genre" 11: "Creative Type" 12: "Director"
-  13: "Rotten Tomatoes Rating" 14: "IMDB Rating" 15: "IMDB Votes"
-  </pre>
+<h2> The Movie Dataset </h2>
+<p> This is an exploratory data analysis exercise that uses this 
+<a href="https://courses.cs.washington.edu/courses/cse512/14wi/a2.html">movies</a> 
+dataset.
 
-  <p> Let's inspect the number of uniq values available per attribute on the dataset:
+<h3> Inspecting the data </h3>
+<p> The csv file contains 3201 movies for each movie we have the following 
+attributes (not all the movies have all the attributes set): </p>
+<pre>
+0: "Title" 1: "US Gross" 2: "Worldwide Gross" 3: "US DVD Sales" 4: "Production Budget"
+5: "Release Date" 6: "MPAA Rating" 7: "Running Time (min)" 8: "Distributor"
+9: "Source" 10: "Major Genre" 11: "Creative Type" 12: "Director"
+13: "Rotten Tomatoes Rating" 14: "IMDB Rating" 15: "IMDB Votes"
+</pre>
 
-  <pre>
-  US Gross 3061 | Worldwide Gross 3075 | US DVD Sales 565 | Production Budget 382
-  Release Date 1604| MPAA Rating 8 | Running Time (min) 110 | Distributor 175
-  Source 19 | Major Genre 13 | Creative Type 10 | Director 551 
-  Rotten Tomatoes Rating 101 | IMDB Rating 78 | IMDB Votes 2840
-  </pre>
+<p> Let's inspect the number of uniq values available per attribute on the dataset:
+
+<pre>
+US Gross 3061 | Worldwide Gross 3075 | US DVD Sales 565 | Production Budget 382
+Release Date 1604| MPAA Rating 8 | Running Time (min) 110 | Distributor 175
+Source 19 | Major Genre 13 | Creative Type 10 | Director 551 
+Rotten Tomatoes Rating 101 | IMDB Rating 78 | IMDB Votes 2840
+</pre>
 
 <h3> Distributions for the numerical attributes </h3>
 
@@ -35,20 +40,15 @@ dig a bit deeper.
 
 <p> Now that I know a bit more about the dataset, what are some interesting questions?
 
-<h3> How many movies do we have per year? </h3>
+<p> First, there a few entries with incorrect release dates. I apply various filters
+to clean up the data. After that bit of cleaning, I end up with 1372 movies.
 
-<p> First, there a few entries with incorrect release dates. I am going to only
-work with movies that have a valid year. To accomplish that, I am only work
-with years where we have more than 5 movies. In addition, I only process movies
-for which I can parse the data. After that bit of cleaning, I end up with 3047 movies 
-that range from year 1970 to 2010. 
+<h2> Questions</h2>
 
-<h3> More interesting questions: are movies during the holidays more likely to have
-worse ratings?
-</h3>
+<h3> Are movies during the holidays more likely to have worse ratings? </h3>
 
-<p> This is a more interesting question. To answer that we need the budget, ratings (remember
-we have rotten tomatoes and imdb) and the release date. Let's hack...
+<p> To answer that we need the budget, ratings (remember we have rotten
+tomatoes and imdb) and the release date. Let's hack...
 
 <p>
 Year start: <select id="year-start"> </select>
@@ -65,18 +65,9 @@ December (bottom right dotplot).
 <p> A lot of filtering and cleaning and digging here but I can't confirm my
 hypothesis.  I tried to look at both ratings by combining them when available. 
 
-<p> Another lesson learned: Clean clean and clean the data. And make sure it is
-correct and you don't have bugs in your code that introduce errors.
-
 <p> We could look at the data starting in older years. Does the hypothesis hold then? 
 Also, we would like to provide controls so we can dynamically update the dataset by 
-changing things like: movie year, 
-
-<p> Another question: is there an increase in budget over time (adjusted to inflation)?
-<p> Another question: Do movies with more budget have better ratings?
-<p> Another question: Do popular (more votes) movies get better or worse ratings?
-
-<p> Are there directors releasing consistency highly rated movies?
+changing things like: movie year.
 
 <p> I have to hack the viz so I can check the title for movies with high
 ratings so I can see if I have seen them. Done (via console).
@@ -91,11 +82,16 @@ It seems there is:
   </div>
 </div>
 
-<h3> How are directors doing?</h3>
+<h3> Are there directors releasing consistently high rated movies? </h3>
 <p> Here each dot is a director. The Axis show average revenue and average ratings for all of their movies. The size of the dot encodes the number of movies for the director.
-<div id="viz-directors">
-</div>
+<div id="viz-directors-info">Move over a dot to reveal director's info.</div>
+<div id="viz-directors"></div>
+<p> The next step here would be to consider the budget of the movies to see what directors are more appealing for movie companies.
 
+<h3> Other questions </h3>
+<p> Another question: is there an increase in budget over time (adjusted to inflation)?
+<p> Another question: Do movies with more budget have better ratings?
+<p> Another question: Do popular (more votes) movies get better or worse ratings?
 
 </div>
   </body>
