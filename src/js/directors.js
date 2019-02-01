@@ -9,22 +9,23 @@ import {getDirectorsToMovies} from './processing.js';
 import {dotPlot} from './viz/dotplot.js';
 
 const DIRECTORS_SEL = '#viz-directors';
+const BIG_DOT_R = 30;
+const SMALL_DOT_R = 4;
 
 export const directorsViz = (movies) => {
   const directors = getDirectorsToMovies(movies);
 
-  const biggestDotSize = 20;
   const scaleNumberMovies = scaleLinear()
     .domain(extent(directors.map((d) => d.movies.length))).nice()
-    .range([4, biggestDotSize]);
+    .range([SMALL_DOT_R, BIG_DOT_R]);
 
   dotPlot({
     elementIDSel: DIRECTORS_SEL,
-    width: 800,
-    height: 800,
+    width: 850,
+    height: 850,
     xLabel: 'revenue',
     yLabel: 'rating',
-    background: 'ivory',
+    background: 'ghostwhite',
     onClickLogic: (d) => console.log(d.name, d.movies),
     data: directors.map((director) => {
       const color = 'black';

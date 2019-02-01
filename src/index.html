@@ -10,42 +10,19 @@
   <h3> Inspecting the data </h3>
   <p> The csv file contains 3201 movies for each movie we have the following attributes (not all the movies have all the attributes set): </p>
   <pre>
-  0: "Title"
-  1: "US Gross"
-  2: "Worldwide Gross"
-  3: "US DVD Sales"
-  4: "Production Budget"
-  5: "Release Date"
-  6: "MPAA Rating"
-  7: "Running Time (min)"
-  8: "Distributor"
-  9: "Source"
-  10: "Major Genre"
-  11: "Creative Type"
-  12: "Director"
-  13: "Rotten Tomatoes Rating"
-  14: "IMDB Rating"
-  15: "IMDB Votes"
+  0: "Title" 1: "US Gross" 2: "Worldwide Gross" 3: "US DVD Sales" 4: "Production Budget"
+  5: "Release Date" 6: "MPAA Rating" 7: "Running Time (min)" 8: "Distributor"
+  9: "Source" 10: "Major Genre" 11: "Creative Type" 12: "Director"
+  13: "Rotten Tomatoes Rating" 14: "IMDB Rating" 15: "IMDB Votes"
   </pre>
 
   <p> Let's inspect the number of uniq values available per attribute on the dataset:
 
   <pre>
-  US Gross 3061
-  Worldwide Gross 3075
-  US DVD Sales 565
-  Production Budget 382
-  Release Date 1604
-  MPAA Rating 8
-  Running Time (min) 110
-  Distributor 175
-  Source 19
-  Major Genre 13
-  Creative Type 10
-  Director 551
-  Rotten Tomatoes Rating 101
-  IMDB Rating 78
-  IMDB Votes 2840
+  US Gross 3061 | Worldwide Gross 3075 | US DVD Sales 565 | Production Budget 382
+  Release Date 1604| MPAA Rating 8 | Running Time (min) 110 | Distributor 175
+  Source 19 | Major Genre 13 | Creative Type 10 | Director 551 
+  Rotten Tomatoes Rating 101 | IMDB Rating 78 | IMDB Votes 2840
   </pre>
 
 <h3> Distributions for the numerical attributes </h3>
@@ -115,6 +92,7 @@ It seems there is:
 </div>
 
 <h3> How are directors doing?</h3>
+<p> Here each dot is a director. The Axis show average revenue and average ratings for all of their movies. The size of the dot encodes the number of movies for the director.
 <div id="viz-directors">
 </div>
 

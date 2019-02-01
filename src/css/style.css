@@ -78,9 +78,9 @@ pre {
   /*display: block;*/
   /*padding: 10px;*/
  /* background: ghostwhite;*/
-  border: 1px solid grey;
-	width: 800px;
-  height: 800px;
+  border: 0px solid grey;
+	width: 900px;
+  height: 900px;
   margin-top: 2px;
 }
 

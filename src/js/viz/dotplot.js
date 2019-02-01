@@ -1,5 +1,5 @@
 import { select, selectAll } from 'd3-selection';
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleLog } from 'd3-scale';
 import { min, max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
@@ -27,7 +27,7 @@ export const dotPlot = (opts) => {
     .domain(getMinMax(data.map((point) => point.y))).nice()
     .range([height, 0]);
 
-  if (opts.background)
+ if (opts.background)
     select(opts.elementIDSel).style("background", opts.background);
 
   const svg = select(opts.elementIDSel)
