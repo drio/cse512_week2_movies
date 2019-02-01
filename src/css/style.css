@@ -112,7 +112,20 @@ pre {
   border: 1px solid grey;
 	width: 850px;
   height: 850px;
-  margin-top: 2px;
+  margin-top: 20px;
 }
 
+#viz-genre-label {
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 0;
+	justify-content: left;
+}
 
+.color-square {
+	width: 20px;
+	height: 20px;
+	background: red;
+	margin-right: 5px;
+	margin-left: 5px;
+}

@@ -1,5 +1,5 @@
 //import {} from 'lodash';
-import { select } from 'd3-selection';
+import { select, selectAll } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 import { extent } from 'd3-array';
 
@@ -7,18 +7,15 @@ import {HEADER, GENRES} from './constants.js';
 import {dotPlot} from './viz/dotplot.js';
 
 const MOVIES_SEL = '#viz-genre';
-
-const onMouseOverLogic = (d) => {
-}
-
-const onMouseOutLogic = (d) => {
-}
+const LABEL_SEL = '#viz-genre-label';
 
 const onClickLogic = (d) => {
   console.log(d.movie);
 }
 
 export const genreViz = (movies) => {
+	const colorScale = scaleLinear().domain([0, GENRES.length-1]).range(['blue', 'red']);
+
   dotPlot({
     elementIDSel: MOVIES_SEL,
     width: 800,
@@ -27,14 +24,12 @@ export const genreViz = (movies) => {
     yLabel: 'rating',
     background: 'floralwhite',
     onClickLogic,
-    onMouseOutLogic,
-    onMouseOverLogic,
     data: movies.map((m) => {
       const color = 'black';
       return {
         x: +m[HEADER.imdb_votes],
         y: +m[HEADER.imdb_rating],
-        fill: 'Maroon',
+        fill: colorScale(GENRES.indexOf(m[HEADER.genre])),
         r: 5,
         movie: m,
       };
