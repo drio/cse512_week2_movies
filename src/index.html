@@ -66,17 +66,16 @@ with years where we have more than 5 movies. In addition, I only process movies
 for which I can parse the data. After that bit of cleaning, I end up with 3047 movies 
 that range from year 1970 to 2010. 
 
-<h3> More interesting questions: Are bad movies, with a big budget, released during the 
-     holidays?</h3>
+<h3> More interesting questions: are movies during the holidays more likely to have
+worse ratings?
+</h3>
 
 <p> This is a more interesting question. To answer that we need the budget, ratings (remember
 we have rotten tomatoes and imdb) and the release date. Let's hack...
 
 <p>
-Year start:
-<select id="year-start"> </select>
-Year end:
-<select id="year-end"> </select>
+Year start: <select id="year-start"> </select>
+Year end: <select id="year-end"> </select>
 
 <div id="viz-dotplot-container"></div>
 
@@ -114,6 +113,11 @@ It seems there is:
   <div id="viz-usvsworld-viz">
   </div>
 </div>
+
+<h3> How are directors doing?</h3>
+<div id="viz-directors">
+</div>
+
 
 </div>
   </body>

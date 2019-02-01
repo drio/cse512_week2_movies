@@ -54,7 +54,7 @@ export const dotPlot = (opts) => {
       .attr('cy', (d) => yScale(d.y))
       .attr('fill', (d) => d.fill || default_fill)
       .attr("r", (d) => d.r || default_r)
-            .on("click", (d) => console.log(d.movie));
+            .on("click", (d) => console.log(d));
 
   /* Axis */ 
   const xAxis = axisBottom()

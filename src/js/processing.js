@@ -1,5 +1,5 @@
-import {HEADER} from './constants.js';
-import {keys} from 'lodash';
+import {HEADER, combinedRatings, combinedGross} from './constants.js';
+import {chain, keys, mean} from 'lodash';
 
 export const findAttributeValuesFor = (attrName, movieRows) => {
 	const set = new Set([]);
@@ -24,6 +24,34 @@ export const isValidMovie = (movie) => {
 	  (+movie[HEADER.imdb_votes] && +movie[HEADER.imdb_votes] > 100)
 	);	
 };
+
+export const getDirectorsToMovies = (movieRows) => {
+	/* Build a year to clean movies  data structure */
+	const byDirector = {};
+	movieRows.forEach((movie) => {
+	  const director = movie[HEADER.director];
+		if (isValidMovie(movie) && director) {
+			if (!byDirector.hasOwnProperty(director)) {
+				byDirector[director] = [];
+			}
+			byDirector[director].push(movie);
+		}
+	})
+
+  const directors = [];
+  keys(byDirector).forEach((name) => {
+    const ratings = byDirector[name].map((movie) => combinedRatings(movie));
+    const gross = byDirector[name].map((movie) => combinedGross(movie));
+    directors.push({
+      name,
+      movies: byDirector[name],
+      averageRating: mean(ratings),
+      averageGross: mean(gross),
+    });
+  })
+
+	return directors;
+}
 
 export const getMoviesByYear = (movieRows) => {
 	/* Build a year to clean movies  data structure */
