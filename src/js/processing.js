@@ -14,6 +14,7 @@ export const isValidMovie = (movie) => {
 	const parsed = Date.parse(dateString);
 	return (
 		parsed && parsed > 0 &&
+	  movie[HEADER.genre] !== "" &&
 	  +movie[HEADER.imdb_rating] > 0 &&
 	  +movie[HEADER.imdb_rating] <= 10 &&
 	  +movie[HEADER.rt_rating] > 0 &&
@@ -21,6 +22,7 @@ export const isValidMovie = (movie) => {
 	  +movie[HEADER.us_gross] > 100 &&
 	  +movie[HEADER.world_gross] > 100 &&
 	  +movie[HEADER.world_gross] !== +movie[HEADER.us_gross] &&
+	  (!isNaN(movie[HEADER.imdb_votes])) &&
 	  (+movie[HEADER.imdb_votes] && +movie[HEADER.imdb_votes] > 100)
 	);	
 };

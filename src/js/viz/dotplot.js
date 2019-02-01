@@ -7,7 +7,7 @@ import { format } from 'd3-format';
 const getMinMax = (arrayPoints) => [ 0, max(arrayPoints) ];
 
  /* https://bl.ocks.org/mbostock/3019563 */
-const margin = {top: 20, right: 20, bottom: 40, left: 40};
+const margin = {top: 40, right: 40, bottom: 40, left: 40};
 
 export const dotPlot = (opts) => {
   const data = opts.data || [],
@@ -20,8 +20,10 @@ export const dotPlot = (opts) => {
         height = opts.height - margin.top - margin.bottom;
 
   const xScale = scaleLinear()
-    .domain(getMinMax(data.map((point) => point.x))).nice()
+    .domain(getMinMax(data.map((point) => point.x)))
     .range([0, width]);
+  
+  window.x = xScale;
 
   const yScale = scaleLinear()
     .domain(getMinMax(data.map((point) => point.y))).nice()

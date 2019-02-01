@@ -3,6 +3,7 @@ import {holidaysViz} from './holidays.js';
 import {usVsWorldViz} from './usvsworld.js';
 import {distributionsViz} from './distributions.js';
 import {directorsViz} from './directors.js';
+import {genreViz} from './genre.js';
 import {csv} from 'd3-fetch';
 import {keys} from 'lodash';
 
@@ -30,6 +31,7 @@ window.onload = () => {
     distributionsViz(listAllMoviesClean);
     holidaysViz(listAllMoviesClean);
     usVsWorldViz(listAllMoviesClean);
-    directorsViz(movieRows);
+    directorsViz(listAllMoviesClean);
+    genreViz(listAllMoviesClean);
   });
 };
