@@ -13,10 +13,10 @@ const DIRECTORS_SEL = '#viz-directors';
 export const directorsViz = (movies) => {
   const directors = getDirectorsToMovies(movies);
 
-  const biggestDotSize = 12;
+  const biggestDotSize = 20;
   const scaleNumberMovies = scaleLinear()
     .domain(extent(directors.map((d) => d.movies.length))).nice()
-    .range([3, biggestDotSize]);
+    .range([4, biggestDotSize]);
 
   dotPlot({
     elementIDSel: DIRECTORS_SEL,
@@ -25,6 +25,7 @@ export const directorsViz = (movies) => {
     xLabel: 'revenue',
     yLabel: 'rating',
     background: 'ivory',
+    onClickLogic: (d) => console.log(d.name, d.movies),
     data: directors.map((director) => {
       const color = 'black';
       return {
@@ -32,7 +33,8 @@ export const directorsViz = (movies) => {
         y: director.averageRating,
         fill: 'Brown',
         r: scaleNumberMovies(director.movies.length),
-        data: director
+        movies: director.movies,
+        name: director.name,
       };
     })
   });

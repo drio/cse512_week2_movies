@@ -53,8 +53,10 @@ export const dotPlot = (opts) => {
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
       .attr('fill', (d) => d.fill || default_fill)
+      .attr('stroke', 'black')
+      .attr('stroke-width', 1)
       .attr("r", (d) => d.r || default_r)
-            .on("click", (d) => console.log(d));
+        .on("click", opts.onClickLogic);
 
   /* Axis */ 
   const xAxis = axisBottom()
