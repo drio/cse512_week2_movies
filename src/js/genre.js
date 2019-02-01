@@ -18,8 +18,8 @@ export const genreViz = (movies) => {
 
   dotPlot({
     elementIDSel: MOVIES_SEL,
-    width: 800,
-    height: 800,
+    width: 400,
+    height: 400,
     xLabel: 'number votes',
     yLabel: 'rating',
     background: 'floralwhite',
@@ -30,7 +30,7 @@ export const genreViz = (movies) => {
         x: +m[HEADER.imdb_votes],
         y: +m[HEADER.imdb_rating],
         fill: colorScale(GENRES.indexOf(m[HEADER.genre])),
-        r: 5,
+        r: 3,
         movie: m,
       };
     })
