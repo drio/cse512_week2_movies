@@ -3,6 +3,7 @@ import {dotPlot} from './viz/dotplot.js';
 import {drd_heatmap} from './viz/heatmap.js';
 import {select, selectAll, event as d3event} from 'd3-selection';
 import {range} from 'lodash';
+import {interpolateOrRd, interpolateGnBu} from 'd3-scale-chromatic';
 
 const yearIDS = [ "#year-start", "#year-end" ];
 
@@ -166,16 +167,31 @@ export const heatMapHolidaysViz = (movies) => {
   console.log(moviesByMonth);
   drd_heatmap({
     elementIDSel: '#viz-heatmap-container',
-    width: 36 * 20,
-    height: 20 * (moviesByMonth.length/36),
+    width: 12 * 20,
+    height: 20 * (moviesByMonth.length/12),
     side_size: 20,
     pad: 2,
-    corner_radius: 5,
-    fill: 'bisque',
-    stroke: 'white',
-    stroke_width: 2,
+    corner_radius: 0,
+    fill: (d, i) => d.mean ? interpolateOrRd(d.mean/100) : 'white',
+    stroke: 'black',
+    stroke_width: 0,
     background: 'white',
     data: moviesByMonth,
   });
+
+  drd_heatmap({
+    elementIDSel: '#viz-heatmap-container-2',
+    width: 12 * 20,
+    height: 20 * (moviesByMonth.length/12),
+    side_size: 20,
+    pad: 2,
+    corner_radius: 0,
+    fill: (d, i) => d.mean ? interpolateGnBu(d.mean/100) : 'white',
+    stroke: 'white',
+    stroke_width: 0,
+    background: 'white',
+    data: moviesByMonth,
+  });
+
 };
 
