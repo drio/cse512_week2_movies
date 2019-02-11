@@ -32,6 +32,6 @@ window.onload = () => {
     holidaysViz(listAllMoviesClean);
     usVsWorldViz(listAllMoviesClean);
     directorsViz(listAllMoviesClean);
-    genreViz(listAllMoviesClean);
+    //genreViz(listAllMoviesClean);
   });
 };

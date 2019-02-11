@@ -35,8 +35,8 @@ export const directorsViz = (movies) => {
 
   dotPlot({
     elementIDSel: DIRECTORS_SEL,
-    width: 850,
-    height: 850,
+    width: 650,
+    height: 650,
     xLabel: 'revenue',
     yLabel: 'rating',
     background: 'ghostwhite',
