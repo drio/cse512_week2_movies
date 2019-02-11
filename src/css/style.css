@@ -57,6 +57,19 @@ pre {
 	margin: 5px;
 }
 
+#viz-heatmap-container {
+  /*display: block;*/
+  /*padding: 10px;*/
+	display: flex;
+  flex-wrap: wrap;
+	flex-grow: 1;
+	justify-content: center;
+  border: 0px solid grey;
+	width: 900px;
+	height: 200px;
+  margin-top: 2px;
+  background: white;
+}
 
 #viz-usvsworld-container {
 	display: flex;

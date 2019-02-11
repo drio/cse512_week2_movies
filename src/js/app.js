@@ -1,5 +1,5 @@
 import '../css/style.css';
-import {holidaysViz} from './holidays.js';
+import {holidaysViz, heatMapHolidaysViz} from './holidays.js';
 import {usVsWorldViz} from './usvsworld.js';
 import {distributionsViz} from './distributions.js';
 import {directorsViz} from './directors.js';
@@ -30,6 +30,7 @@ window.onload = () => {
 
     distributionsViz(listAllMoviesClean);
     holidaysViz(listAllMoviesClean);
+    heatMapHolidaysViz(listAllMoviesClean);
     usVsWorldViz(listAllMoviesClean);
     directorsViz(listAllMoviesClean);
     //genreViz(listAllMoviesClean);

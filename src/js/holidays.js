@@ -1,5 +1,6 @@
 import {HEADER, MONTHS, combinedRatings, combinedGross, YEAR_RANGE} from './constants.js';
 import {dotPlot} from './viz/dotplot.js';
+import {drd_heatmap} from './viz/heatmap.js';
 import {select, selectAll, event as d3event} from 'd3-selection';
 import {range} from 'lodash';
 
@@ -10,6 +11,68 @@ const state = {
   yearStart: YEAR_RANGE[0],
   yearEnd: YEAR_RANGE[1],
 };
+
+const flattenForHeatMap = (moviesByYear) => {
+  const years = _.keys(moviesByYear);
+  const flat_months = [];
+
+  _.keys(moviesByYear).forEach((year) => {
+    _.forEach(_.range(0, 12), (month) => {
+      const listRatings = moviesByYear[year][month];
+      flat_months.push({
+        year,
+        month,
+        mean: listRatings.length === 0 ? null : _.mean(listRatings)
+      })
+    })
+  });
+
+  return flat_months;
+};
+
+const parseDate = (dateString) => {
+  /* We know it is going to be parse-able */
+  const month = new Date(dateString).getMonth();
+  const year = new Date(dateString).getFullYear();
+  return [month, year];
+};
+
+const addMonthAndYear = (movies) => {
+  return _.chain(movies)
+    .map((m) => {
+      return _.pick(m, [HEADER.release, HEADER.imdb_rating, HEADER.rt_rating]);
+    })
+    .map((m) => {
+		  const [month, year] = parseDate(m[HEADER.release]);
+      return _.merge(m, { month, year });
+    })
+    .sortBy(['year', 'month'])
+    .value();
+}
+
+const getMoviesByMonth = (movies) => {
+  const store = {};
+
+  addMonthAndYear(movies).forEach((movie) => {
+    const {year, month} = movie;
+    if (!store.hasOwnProperty(year)) { 
+      store[year] = {monthsWithMovies: 0};
+      _.forEach(_.range(0, 12), (month) => store[year][month] = []);
+    }
+    if (store[year][month].length === 0) store[year].monthsWithMovies += 1;
+    store[year][month].push(combinedRatings(movie));
+  });
+
+  /*
+  const yearsToMovies = {};
+  _.keys(store).forEach((year) => {
+    if (store[year].monthsWithMovies === 12)
+      yearsToMovies[year] = store[year];
+  });
+  */
+
+  return store;
+}
 
 const updateCurrentYears = () => {
   const years =  yearIDS.map((selID) => {
@@ -24,9 +87,7 @@ const processMovies = () => {
 	const monthToMovies = {};
   updateCurrentYears();
 	state.allMovies.forEach((movie) => {
-		const dateString = movie[HEADER.release];
-		const month = new Date(dateString).getMonth(); /* We know it is going to be parse-able */
-    const year = new Date(dateString).getFullYear();
+    const [month, year] = parseDate(movie[HEADER.release]);
 		if (month < 0 || month > 11 || isNaN(month)) {
 			console.warn("holidays.js processMovies(): found an invalid month.");
 		}
@@ -99,3 +160,22 @@ export const holidaysViz = (movies) => {
   prepareSelects();
   renderViz();
 };
+
+export const heatMapHolidaysViz = (movies) => {
+  const moviesByMonth = flattenForHeatMap(getMoviesByMonth(movies));	
+  console.log(moviesByMonth);
+  drd_heatmap({
+    elementIDSel: '#viz-heatmap-container',
+    width: 36 * 20,
+    height: 20 * (moviesByMonth.length/36),
+    side_size: 20,
+    pad: 2,
+    corner_radius: 5,
+    fill: 'bisque',
+    stroke: 'white',
+    stroke_width: 2,
+    background: 'white',
+    data: moviesByMonth,
+  });
+};
+
