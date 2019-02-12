@@ -13,7 +13,7 @@ import {
 import {HEADER} from './constants.js';
 
 //const DATA_URL = '/src/assets/movies_small.csv';
-const DATA_URL = '/src//assets/movies.csv';
+const DATA_URL = 'src/assets/movies.csv';
 
 const reportStats = (movieRows) => {
   console.log("header attributes: ", movieRows.columns);
