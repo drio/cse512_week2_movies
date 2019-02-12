@@ -164,7 +164,6 @@ export const holidaysViz = (movies) => {
 
 export const heatMapHolidaysViz = (movies) => {
   const moviesByMonth = flattenForHeatMap(getMoviesByMonth(movies));	
-  console.log(moviesByMonth);
   drd_heatmap({
     elementIDSel: '#viz-heatmap-container',
     width: 12 * 20,
