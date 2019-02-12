@@ -53,6 +53,8 @@ export const directorsViz = (movies) => {
         movies: director.movies,
         movieNames: director.movies.map((m) => m[HEADER.title]),
         name: director.name,
+        xNumTicks: 6,
+        yNumTicks: 6,
       };
     })
   });

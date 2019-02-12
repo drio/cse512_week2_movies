@@ -12,9 +12,11 @@ const margin = {top: 40, right: 40, bottom: 40, left: 40};
 export const dotPlot = (opts) => {
   const data = opts.data || [],
         default_fill = 'black',
-        default_r = 2;
+        default_r = 2,
+        xNumTicks = opts.xNumTicks || 4,
+        yNumTicks = opts.yNumTicks || 4;
 
-  const formatSIPrefix = format(".1s");
+  const formatSIPrefix = format(".2s");
 
   const width  = opts.width - margin.left - margin.right,
         height = opts.height - margin.top - margin.bottom;
@@ -65,12 +67,12 @@ export const dotPlot = (opts) => {
   /* Axis */ 
   const xAxis = axisBottom()
     .scale(xScale)
-    .ticks(opts.xNumTicks)
+    .ticks(xNumTicks)
     .tickFormat(formatSIPrefix);
 
   const yAxis = axisLeft()
     .scale(yScale)
-    .ticks(opts.yNumTicks)
+    .ticks(yNumTicks)
     .tickFormat(formatSIPrefix);
 
   svg.append("g")
